@@ -35,7 +35,7 @@ function SignupPage () {
             <Input label="Nome" />
             <Input label="Sobrenome" />
             <Input label="Usuario" />            
-            <Input label="Email ou Usuario" type="email" />
+            <Input label="Email" type="email" />
             <Input label="Senha" type="password" />
             <Button>Entrar</Button>
           </Form>
