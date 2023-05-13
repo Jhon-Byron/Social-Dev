@@ -16,9 +16,13 @@ const postShema = Joi.object({
 
 const signup = createHandler()
 
-  signup.post(validate({ body: postShema }), (req, res) => {
-     signupUser(req.body)
-     res.status(200).json({ teste: "ok"})
-  })
+  signup.post(validate({ body: postShema }), async (req, res) => {
+  try {
+      const user = await signupUser(req.body)
+      res.status(201).json(user)
+  } catch (err) {
+    throw err
+  }
+ } )
 
 export default signup
