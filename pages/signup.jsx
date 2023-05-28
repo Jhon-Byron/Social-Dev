@@ -12,6 +12,7 @@ import H2 from "../src/components/typografhy/H2"
 import H4 from "../src/components/typografhy/H4"
 import Button from "../src/components/inputs/Button"
 import Input from "../src/components/inputs/Input"
+import { object } from "joi"
 
 const FormContainer = styled.div`
   margin-top: 60px;
@@ -36,7 +37,6 @@ function SignupPage () {
 const handleForm = (data) => {
  console.log(data)
 }
-console.log(errors)
 
   return(
     <>
@@ -46,12 +46,12 @@ console.log(errors)
         <FormContainer>
           <H2>Crie sua Conta</H2>
           <Form onSubmit={handleSubmit(handleForm)}>
-            <Input label="Nome" {...register('firstName')}  />
-            <Input label="Sobrenome" {...register('lastName')}/>
-            <Input label="Usuario" {...register('user')} />            
-            <Input label="Email" type="email" {...register('email')} />
-            <Input label="Senha" type="password" {...register('password')} />
-            <Button type="submit">Cadastrar</Button>
+            <Input label="Nome" {...register('firstName')} error={errors.firstName}  />
+            <Input label="Sobrenome" {...register('lastName')} error={errors.lastName} />
+            <Input label="Usuario" {...register('user')} error={errors.user} />            
+            <Input label="Email" type="email" {...register('email')} error={errors.email} />
+            <Input label="Senha" type="password" {...register('password')} error={errors.password} />
+            <Button type="submit" disabled={Object.keys(errors).length > 0}>Cadastrar</Button>
           </Form>
           <Text>Já possui uma conta? <Link href="/Login">Faça seu Login</Link></Text>
         </FormContainer>
