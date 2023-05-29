@@ -4,7 +4,8 @@ import createHandler from '../../../lib/middlewares/nextConnect'
 import validate from '../../../lib/middlewares/validation'
 import { signupUser } from "../../../modules/user/user.service"
 import { ironConfig } from '../../../lib/middlewares/ironSession'
-import { signupShema } from "../modules/user/user.shema"
+import { signupShema } from '../../../modules/user/user.shema'
+import { object } from 'joi'
 
 
 const signup = createHandler()
@@ -21,6 +22,12 @@ const signup = createHandler()
 
       res.status(201).json({ ok: true })
   } catch (err) {
+    if (err.code === 11000) {
+      return res.status(400).send({
+        code: 11000,
+        duplicatedkey: Object.keys(err.keyPattern)[0]
+      })
+    }
     throw err
   }
  } )
