@@ -1,8 +1,16 @@
 import styled from "styled-components"
+import { useForm } from 'react-hook-form'
+import { joiResolver } from '@hookform/resolvers/joi'
+import axios from "axios"
+import { useSWRConfig } from "swr"
+
+import { createPostSchema } from '../../../modules/post/post.shema'
+
 
 import H4 from "../typografhy/H4"
-import TextArea from "../inputs/TextArea"
+import ControlledTextarea from "../inputs/ControlledTextarea"
 import Button from "../inputs/Button"
+
 
 const PostContainer = styled.div`
   background-color: ${props => props.theme.white};
@@ -37,6 +45,22 @@ const BottomTex = styled.p`
 `
 
 function CreatePost ({ username }) {
+  const { mutate } = useSWRConfig()
+
+  const { control, handleSubmit, formState: { isValid }, reset } = useForm({
+    resolver: joiResolver(createPostSchema),
+    mode: 'all'
+})
+  
+  const onSubmit = async (data) => {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/post`, data)
+    if (response.status === 201) {
+      reset()
+      mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/post`)
+    }
+    
+  }
+  
   return (
     <PostContainer>
       <H4>
@@ -44,13 +68,21 @@ function CreatePost ({ username }) {
           No que você está pensando, @{username}?
         </Title>
       </H4>
-      <TextContainer>
-        <TextArea placeholder="Digite sua mensagem" rows="4" />
-      </TextContainer>
-      <BottomContainer>
-        <BottomTex>A sua mensagem será publica</BottomTex>
-        <Button>Enviar Mensagem</Button>
-      </BottomContainer>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TextContainer>
+          <ControlledTextarea 
+            control={control} 
+            placeholder="Digite sua mensagem" 
+            rows="4" 
+            name="text"
+            maxLength="256"
+          />
+        </TextContainer>
+        <BottomContainer>
+          <BottomTex>A sua mensagem será publica</BottomTex>
+          <Button disabled={!isValid}>Postar Mensagem</Button>
+        </BottomContainer>
+      </form>
     </PostContainer>
   )
 }
