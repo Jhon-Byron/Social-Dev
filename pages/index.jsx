@@ -47,6 +47,8 @@ function HomePage ({ user }) {
                   user={post.createBy.user}
                   date={post.createDate}
                   text={post.text}
+                  isOwner={post.createBy._id === user.id}
+                  id={post._id}
                 />
                 )
             }
