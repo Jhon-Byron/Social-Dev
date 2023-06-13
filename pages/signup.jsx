@@ -65,7 +65,7 @@ const handleForm = async (data) => {
             <Input label="Senha" type="password" name='password' control={control} />
             <Button type="submit" disabled={Object.keys(errors).length > 0}>Cadastrar</Button>
           </Form>
-          <Text>Já possui uma conta? <Link href="/Login">Faça seu Login</Link></Text>
+          <Text>Já possui uma conta? <Link href="/login">Faça seu Login</Link></Text>
         </FormContainer>
       </ImageWithSpace>
     </>

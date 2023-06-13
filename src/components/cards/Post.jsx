@@ -69,11 +69,11 @@ function Post ({ user, date, text, isOwner, id }) {
           <Menu 
             options={[
             {
-              text: 'editar publicação',
+              text: 'Editar publicação',
               onClick: handleEdit
             },
             {
-              text: 'deletar publicação',
+              text: 'Deletar publicação',
               onClick: handleDelete
             }
            ]}

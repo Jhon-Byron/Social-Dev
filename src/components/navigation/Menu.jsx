@@ -11,7 +11,7 @@ const StyledMenu = styled.div`
   box-shadow: 6px 5px 15px 5px rgba(0, 0, 0, 0.2);
   right: 0;
   background-color: ${props => props.theme.white};
-
+  border-radius: 15px;
 
   display: ${props => props.show ? 'block' : 'none'};
 `
@@ -19,6 +19,7 @@ const StyledMenu = styled.div`
 const StyledOption = styled.div`
   padding: 15px;
   cursor: pointer;
+  border-radius: 15px;
 
   :hover {
     background-color: ${props => props.theme.inputBackground};
