@@ -13,6 +13,7 @@ import H2 from "../src/components/typografhy/H2"
 import H4 from "../src/components/typografhy/H4"
 import Button from "../src/components/inputs/Button"
 import Input from "../src/components/inputs/Input"
+import SocialDev from "../src/components/layout/Socialdev"
 
 const FormContainer = styled.div`
   margin-top: 60px;
@@ -53,7 +54,9 @@ const handleForm = async (data) => {
   return(
     <>
       <ImageWithSpace>
-        <H1># Social Dev</H1>
+        <H1>
+          <SocialDev />
+        </H1>
         <H4>Tudo que acontece no mundo dev, está aqui!</H4>
         <FormContainer>
           <H2>Crie sua Conta</H2>
@@ -63,7 +66,7 @@ const handleForm = async (data) => {
             <Input label="Usuario" name='user' control={control} />            
             <Input label="Email" type="email" name='email' control={control} />
             <Input label="Senha" type="password" name='password' control={control} />
-            <Button type="submit" disabled={Object.keys(errors).length > 0}>Cadastrar</Button>
+            <Button loading type="submit" disabled={Object.keys(errors).length > 0}>Cadastrar</Button>
           </Form>
           <Text>Já possui uma conta? <Link href="/login">Faça seu Login</Link></Text>
         </FormContainer>

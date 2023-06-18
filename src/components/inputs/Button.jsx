@@ -1,4 +1,4 @@
-import { Children } from "react"
+
 import styled from "styled-components"
 
 const StyledButton = styled.button`
@@ -27,7 +27,7 @@ const Button = ({ children, loading, disabled, ...props }) =>{
       disabled={disabled || loading}
       {...props}
     >
-      {loading && <img src="./loading.svg" width="14px" />}
+      {loading && <img src="./trespontos.svg" width="32px" />}
       {!loading && children}
     </StyledButton>
   )

@@ -20,6 +20,11 @@ const StyledLogo = styled.span`
   font-size: 20px;
 `
 
+const StyledSpan = styled.span`
+ position: relative;
+ top: 8px;
+`
+
 const StyledLogout = styled.a`
   cursor: pointer;
 `
@@ -33,12 +38,14 @@ function Navbar () {
   }
 
   return(
-    <StyledNavbar>
-      <StyledLogo># Social Dev</StyledLogo>
-      <div>
-        <StyledLogout onClick={(handleLogout)}>Desconectar</StyledLogout>
-      </div>
-    </StyledNavbar>
+    <>
+      <StyledNavbar>
+        <StyledLogo> Social <StyledSpan><img src="./dev-to-svgrepo-com.svg" width="40px" /></StyledSpan> </StyledLogo>
+        <div>
+          <StyledLogout onClick={(handleLogout)}>Desconectar</StyledLogout>
+        </div>
+      </StyledNavbar>
+    </>
   )
 
 }
