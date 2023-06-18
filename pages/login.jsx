@@ -1,3 +1,4 @@
+import { useState } from "react"
 import styled from "styled-components"
 import Link from "next/link"
 import { useForm } from "react-hook-form" //criar formulario
@@ -13,6 +14,7 @@ import H2 from "../src/components/typografhy/H2"
 import H4 from "../src/components/typografhy/H4"
 import Button from "../src/components/inputs/Button"
 import Input from "../src/components/inputs/Input"
+import SocialDev from "../src/components/layout/Socialdev"
 
 const FormContainer = styled.div`
   margin-top: 60px;
@@ -35,8 +37,11 @@ function LoginPage () {
     resolver: joiResolver(LoginSchema)
   })  
 
+  const [loading, setLoading] = useState(false)
+
   const onSubmit = async (data) => {
     try{
+      setLoading(true)
       const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, data)
       if (status === 200) {
         router.push('/')
@@ -53,20 +58,24 @@ function LoginPage () {
         })
       }
       console.log(response.data)
+    } finally {
+        setLoading(false)
     }
   }
 
   return(
     <>
       <ImageWithSpace>
-        <H1># Social Dev</H1>
+        <H1>
+          <SocialDev />
+        </H1>
         <H4>Tudo que acontece no mundo dev, está aqui!</H4>
         <FormContainer>
           <H2>Entre em sua conta</H2>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Input label="Email ou Usuario" name="userOrEmail" control={control} />
             <Input label="Senha" type="password" name="password" control={control} />
-            <Button loading type="submit" disabled={Object.keys(errors).length > 0}>Entrar</Button>
+            <Button loading={loading} type="submit" disabled={Object.keys(errors).length > 0}>Entrar</Button>
           </Form>
           <Text>Não possui uma conta? <Link href="/signup">Faça seu cadastro</Link></Text>
         </FormContainer>
